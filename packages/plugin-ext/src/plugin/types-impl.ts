@@ -1593,6 +1593,30 @@ export class DocumentHighlight {
     }
 }
 
+@es5ClassCompat
+export class MultiDocumentHighlight {
+
+    /**
+     * The URI of the document containing the highlights.
+     */
+    uri: URI;
+
+    /**
+     * The highlights for the document.
+     */
+    highlights: DocumentHighlight[];
+
+    /**
+     * Creates a new instance of MultiDocumentHighlight.
+     * @param uri The URI of the document containing the highlights.
+     * @param highlights The highlights for the document.
+     */
+    constructor(uri: URI, highlights: DocumentHighlight[]) {
+        this.uri = uri;
+        this.highlights = highlights;
+    }
+}
+
 export type Definition = Location | Location[];
 
 @es5ClassCompat
@@ -3673,15 +3697,19 @@ export enum EditSessionIdentityMatch {
 // #endregion
 
 // #region terminalQuickFixProvider
-export class TerminalQuickFixExecuteTerminalCommand {
+export class TerminalQuickFixTerminalCommand {
     /**
      * The terminal command to run
      */
     terminalCommand: string;
     /**
+     * Whether the command should be executed or just inserted (default)
+     */
+    shouldExecute?: boolean;
+    /**
      * @stubbed
      */
-    constructor(terminalCommand: string) { }
+    constructor(terminalCommand: string, shouldExecute?: boolean) { }
 }
 export class TerminalQuickFixOpener {
     /**
